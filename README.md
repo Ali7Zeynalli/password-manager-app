@@ -21,7 +21,8 @@ Feel free to clone, pull, fork, star, open an issue, make changes and commit new
 ## TODO Roadmap
 - :x: Edit password and its properties.
 - :x: Swipe left to edit, right to delete.
-- :x: Settings page.
+- :x: Create settings page.
+- :x: Use secure storage services for database;
 
 ## Packages used
 -  sqflite:

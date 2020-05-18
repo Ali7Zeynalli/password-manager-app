@@ -3,106 +3,147 @@ import 'package:acharlarim/providers/general.dart';
 import 'package:acharlarim/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_brand_icons/flutter_brand_icons.dart';
+import 'package:acharlarim/widgets/custom_snackbar.dart';
 import 'package:provider/provider.dart';
 
 class Add extends StatelessWidget {
-  DatabaseService databaseService = new DatabaseService();
+  final DatabaseService databaseService = new DatabaseService();
+  final TextEditingController titleController = new TextEditingController();
+  final TextEditingController keyController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController titleController = new TextEditingController();
-    TextEditingController keyController = new TextEditingController();
-    var generalProvider = Provider.of<General>(context);
+    final generalProvider = Provider.of<General>(context);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Yeni açar qeyd et"),
-        elevation: 0.0,
-      ),
+      appBar: _appBar(),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  "İkon:",
-                  style: TextStyle(fontSize: 18.0),
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width / 10),
-                DropdownButton(
-                  hint: Icon(generalProvider.iconData),
-                  items: _iconsList
-                      .map(
-                        (IconData icon) => DropdownMenuItem<IconData>(
-                          value: icon,
-                          child: Icon(icon),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (selectedIconData) =>
-                      generalProvider.iconData = selectedIconData,
-                ),
-              ],
-            ),
+            _chooseIcon(context, generalProvider),
             Divider(),
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(
-                  hintText: "facebook, instagram, gmail..",
-                  helperText: "Başlıq",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor,
-                          style: BorderStyle.solid))),
-            ),
+            _titleField(context),
             Divider(),
-            TextField(
-              controller: keyController,
-              decoration: InputDecoration(
-                  hintText: "Şifrə123456789",
-                  helperText: "Açar",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                      borderSide: BorderSide(
-                          color: Theme.of(context).primaryColor,
-                          style: BorderStyle.solid))),
-            ),
+            _passwordField(context),
             Divider(),
-            FlatButton.icon(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              color: Theme.of(context).primaryColor,
-              icon: Icon(Icons.add_box, color: Colors.white),
-              label: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "ƏLAVƏ ET",
-                  style: TextStyle(color: Colors.white, fontSize: 20.0),
-                ),
-              ),
-              onPressed: () => _save(
-                generalProvider.iconData,
-                titleController.text,
-                keyController.text,
-              ),
-            ),
+            _addButton(context, generalProvider),
           ],
         ),
       ),
     );
   }
 
-  void _save(IconData iconData, String title, String key) async {
-    Credential credential = new Credential(
-      icon: iconData.codePoint,
-      title: title,
-      key: key,
+  Widget _addButton(BuildContext context, General generalProvider) {
+    return Builder(
+      builder: (context) => FlatButton.icon(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        color: Theme.of(context).primaryColor,
+        icon: Icon(Icons.add_box, color: Colors.white),
+        label: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "ADD",
+            style: TextStyle(color: Colors.white, fontSize: 20.0),
+          ),
+        ),
+        onPressed: () => _save(
+          generalProvider.iconData,
+          titleController.text,
+          keyController.text,
+          context,
+        ),
+      ),
     );
-    databaseService.insert(credential);
+  }
+
+  Widget _passwordField(BuildContext context) {
+    return TextField(
+      controller: keyController,
+      decoration: InputDecoration(
+        hintText: "Password1234_",
+        helperText: "Password",
+        labelStyle: TextStyle(fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.0),
+          borderSide: BorderSide(
+            color: Theme.of(context).primaryColor,
+            style: BorderStyle.solid,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _titleField(BuildContext context) {
+    return TextField(
+      controller: titleController,
+      decoration: InputDecoration(
+        hintText: "facebook, instagram, gmail..",
+        helperText: "Title",
+        labelStyle: TextStyle(fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.0),
+          borderSide: BorderSide(
+              color: Theme.of(context).primaryColor, style: BorderStyle.solid),
+        ),
+      ),
+    );
+  }
+
+  Widget _chooseIcon(BuildContext context, General generalProvider) {
+    return Row(
+      children: <Widget>[
+        Text(
+          "Icon:",
+          style: TextStyle(fontSize: 18.0),
+        ),
+        SizedBox(width: MediaQuery.of(context).size.width / 10),
+        DropdownButton(
+          hint: Icon(generalProvider.iconData),
+          items: _iconsList
+              .map(
+                (IconData icon) => DropdownMenuItem<IconData>(
+                  value: icon,
+                  child: Icon(icon),
+                ),
+              )
+              .toList(),
+          onChanged: (selectedIconData) =>
+              generalProvider.iconData = selectedIconData,
+        ),
+      ],
+    );
+  }
+
+  Widget _appBar() {
+    return AppBar(
+      title: Text("Add Password"),
+      elevation: 0.0,
+    );
+  }
+
+  void _save(IconData iconData, String title, String key, context) async {
+    if (iconData != null && title != null && key != null) {
+      
+      Provider.of<General>(context, listen: false).clearIconData();
+
+      Credential credential = new Credential(
+        icon: iconData.codePoint,
+        title: title,
+        key: key,
+      );
+      final result = await databaseService.insert(credential);
+      print(result);
+      if (result != null) {
+        CustomSnackBar.display(text: "Password added", context: context);
+        Navigator.of(context).popUntil(ModalRoute.withName("/"));
+      }
+    } else {
+      CustomSnackBar.display(text: "Fill all the fields", context: context);
+    }
   }
 
   List<IconData> _iconsList = <IconData>[

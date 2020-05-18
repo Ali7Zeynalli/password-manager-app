@@ -1,26 +1,30 @@
 import 'package:acharlarim/providers/general.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/home.dart';
+import 'screens/screens.dart';
 
-void main() => runApp(
-      ChangeNotifierProvider<General>(
-        create: (context) => General(),
-        child: MyApp(),
-      ),
-    );
+void main() {
+  runApp(
+    ChangeNotifierProvider<General>(
+      create: (context) => General(),
+      child: MyApp(),
+    ),
+  );
 
-// ThemeData(
-//               primaryColor: Colors.blueGrey[900],
-//               accentColor: Colors.blueGrey[900],
-//               fontFamily: "Quicksand")
+  SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+  );
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var generalProvider = Provider.of<General>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: "Password Manager",
       theme: generalProvider.isDarkTheme
           ? ThemeData.dark().copyWith(
               textTheme: Theme.of(context).textTheme.apply(
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
                     bodyColor: Colors.white,
                     displayColor: Colors.white,
                   ),
-              accentColor: Colors.indigoAccent.withOpacity(0.3),
+              accentColor: Colors.indigoAccent[200],
               appBarTheme: AppBarTheme(
                 textTheme: Theme.of(context).textTheme.apply(
                       fontFamily: "Quicksand",
@@ -39,8 +43,8 @@ class MyApp extends StatelessWidget {
           : ThemeData.light().copyWith(
               textTheme:
                   Theme.of(context).textTheme.apply(fontFamily: "Quicksand"),
-              accentColor: Colors.indigoAccent,
               primaryColor: Colors.indigo,
+              accentColor: Colors.indigoAccent,
               appBarTheme: AppBarTheme(
                 textTheme: Theme.of(context).textTheme.apply(
                       fontFamily: "Quicksand",
@@ -48,7 +52,12 @@ class MyApp extends StatelessWidget {
                     ),
               ),
             ),
-      home: Home(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => Home(),
+        "/add": (context) => Add(),
+        "/settings": (context) => Settings(),
+      },
     );
   }
 }

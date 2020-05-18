@@ -7,7 +7,7 @@ class General with ChangeNotifier {
 
   IconData get iconData => _iconData;
 
-  set iconData(selectedIconData){
+  set iconData(selectedIconData) {
     this._iconData = selectedIconData;
     notifyListeners();
   }
@@ -21,6 +21,8 @@ class General with ChangeNotifier {
     isDarkTheme = prefs.getBool("is_dark_theme") ?? false;
     notifyListeners();
   }
+
+  void clearIconData() => _iconData = null;
 
   void reverseTheme() {
     isDarkTheme = !isDarkTheme;

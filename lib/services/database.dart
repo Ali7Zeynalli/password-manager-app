@@ -39,7 +39,7 @@ class DatabaseService {
         "CREATE TABLE $TABLE($COL_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COL_ICON INTEGER, $COL_TITLE TEXT, $COL_KEY TEXT);");
   }
 
-  getCredentialList() async {
+  Future<List<Credential>> getCredentialList() async {
     Database db = await this.database;
     List<Map<String, dynamic>> credentialsMap = await db.query(TABLE);
     List<Credential> credentials = List<Credential>();
@@ -52,5 +52,10 @@ class DatabaseService {
   Future<int> insert(Credential credential) async {
     Database db = await this.database;
     return await db.insert(TABLE, credential.toMap());
+  }
+
+  Future<int> delete(int id) async {
+    Database db = await this.database;
+    return await db.delete(TABLE, where: "id = ?", whereArgs: [id]);
   }
 }

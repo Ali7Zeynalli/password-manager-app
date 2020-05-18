@@ -3,11 +3,11 @@
 Feel free to clone, pull, fork, star, open an issue, make changes and commit new changes: all are welcomed.
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/1.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/2.png" width="400">
-<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/3.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/4.png" width="400"> 
-<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/5.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/6.png" width="400">
-<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/7.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/8.png" width="400">
-<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/9.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager=app/master/assets/screenshots/10.png" width="400">
+<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/1.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/2.png" width="400">
+<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/3.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/4.png" width="400"> 
+<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/5.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/6.png" width="400">
+<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/7.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/8.png" width="400">
+<img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/9.png" width="400"> <img src="https://raw.githubusercontent.com/kamranbekirovyz/password-manager-app/master/assets/screenshots/10.png" width="400">
 
 ## Feature's
 - :white_check_mark: Add, delete password with title and service icon (such as facebook, twitter, github etc.).
